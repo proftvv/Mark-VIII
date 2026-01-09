@@ -45,7 +45,10 @@ export default function PasskeySetup({ userId, onSuccess }: PasskeySetupProps) {
             residentKey: 'preferred'
           }
         }
-    }) as PublicKeyCredential | null
+      }) as PublicKeyCredential | null
+
+      if (!credential) {
+        setMessage({ type: 'error', text: 'Passkey oluşturulamadı' })
         return
       }
 
