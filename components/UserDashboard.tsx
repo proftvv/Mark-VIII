@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import TwoFactorManage from './TwoFactorManage'
 import Dashboard from './Dashboard'
+import DownloadButton from './DownloadButton'
 
 interface UserDashboardProps {
   username: string
@@ -528,6 +529,9 @@ export default function UserDashboard({
           )}
         </main>
       </div>
+
+      {/* APK Download Button */}
+      <DownloadButton />
     </div>
   )
 }
