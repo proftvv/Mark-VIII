@@ -7,6 +7,15 @@ export async function initDatabase() {
   if (isInitialized) return
   
   try {
+    // Check if tables need to be recreated (schema validation)
+    const needsRecreate = await checkSchemaValidity()
+    
+    if (needsRecreate) {
+      // Drop old tables with incorrect schema
+      await sql`DROP TABLE IF EXISTS encrypted_data CASCADE;`
+      await sql`DROP TABLE IF EXISTS users CASCADE;`
+    }
+
     // Create users table if it doesn't exist
     await sql`
       CREATE TABLE IF NOT EXISTS users (
@@ -35,6 +44,24 @@ export async function initDatabase() {
   } catch (error) {
     console.error('Database initialization error:', error)
     // Don't set isInitialized so it can retry on next call
+  }
+}
+
+async function checkSchemaValidity(): Promise<boolean> {
+  try {
+    // Check if users table has password_hash column
+    const result = await sql`
+      SELECT column_name 
+      FROM information_schema.columns 
+      WHERE table_name = 'users' 
+        AND column_name = 'password_hash'
+    `
+    
+    // If table doesn't exist or column doesn't exist, needs recreate
+    return result.rows.length === 0
+  } catch (error) {
+    // If error, assume needs recreate
+    return true
   }
 }
 
