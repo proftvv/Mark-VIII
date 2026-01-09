@@ -88,7 +88,11 @@ export async function findUserByUsername(username: string) {
     id: number
     username: string
     password_hash: string
-  }>`SELECT id, username, password_hash FROM users WHERE username = ${username} LIMIT 1;`
+    two_factor_enabled: boolean
+    two_factor_secret: string | null
+    backup_codes: string[] | null
+    last_login: Date | null
+  }>`SELECT id, username, password_hash, two_factor_enabled, two_factor_secret, backup_codes, last_login FROM users WHERE username = ${username} LIMIT 1;`
   return rows[0] || null
 }
 

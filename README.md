@@ -69,10 +69,10 @@
 <div align="center">
 
 ### Login & Authentication
-<img src="./public/screenshots/login-screen.png" alt="Login Screen" width="45%"/> <img src="./public/screenshots/register-screen.png" alt="Register Screen" width="45%"/>
+<img src="https://via.placeholder.com/800x400/1e293b/38bdf8?text=Login+Screen+%7C+Biometric+Support" alt="Login Screen" width="45%"/> <img src="https://via.placeholder.com/800x400/1e293b/06b6d4?text=Register+Screen+%7C+Dark+Mode" alt="Register Screen" width="45%"/>
 
 ### Dashboard & Encryption
-<img src="./public/screenshots/dashboard.png" alt="Dashboard" width="45%"/> <img src="./public/screenshots/encryption-panel.png" alt="Encryption Panel" width="45%"/>
+<img src="https://via.placeholder.com/800x400/1e293b/10b981?text=Dashboard+%7C+Data+Management" alt="Dashboard" width="45%"/> <img src="https://via.placeholder.com/800x400/1e293b/f59e0b?text=Encryption+Panel+%7C+AES-256" alt="Encryption" width="45%"/>
 
 </div>
 
