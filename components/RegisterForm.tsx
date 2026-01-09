@@ -52,7 +52,7 @@ export default function RegisterForm({ onSuccess, onSwitchToLogin }: RegisterFor
       const data = await response.json()
 
       if (response.ok) {
-        alert('✅ Hesap başarıyla oluşturuldu! Lütfen giriş yapınız.')
+        window.showToast('Hesap başarıyla oluşturuldu! Lütfen giriş yapınız.', 'success')
         onSuccess()
       } else {
         setError(data.error || 'Kayıt başarısız')

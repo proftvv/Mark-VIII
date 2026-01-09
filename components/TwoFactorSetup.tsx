@@ -73,7 +73,7 @@ export default function TwoFactorSetup({ userId, onSuccess }: TwoFactorSetupProp
 
       if (!res.ok) throw new Error(data.error)
 
-      alert('2FA enabled successfully! Save your backup codes somewhere safe.')
+      window.showToast('2FA başarıyla etkinleştirildi! Yedek kodlarınızı güvenli bir yere kaydedin.', 'success')
       onSuccess()
     } catch (err: any) {
       setError(err.message)

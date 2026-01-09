@@ -401,7 +401,7 @@ export default function UserDashboard({
                   <PasskeySetup 
                     userId={userId} 
                     onSuccess={() => {
-                      alert('Passkey başarıyla ayarlandı! Artık şifresiz giriş yapabilirsiniz.')
+                      window.showToast('Passkey başarıyla ayarlandı! Artık şifresiz giriş yapabilirsiniz.', 'success')
                     }}
                   />
                 </div>

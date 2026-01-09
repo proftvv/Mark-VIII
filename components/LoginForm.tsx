@@ -86,7 +86,7 @@ export default function LoginForm({ onLogin, onSwitchToRegister }: LoginFormProp
       if (response.ok) {
         localStorage.setItem('token', data.token)
         localStorage.setItem('userId', data.userId)
-        alert('✅ Passkey ile giriş başarılı')
+        window.showToast('Passkey ile giriş başarılı!', 'success')
         window.location.href = '/app'
       } else {
         setError(data.error || 'Passkey giriş başarısız')

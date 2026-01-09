@@ -65,7 +65,7 @@ export default function TwoFactorManage({ userId, enabled, onEnable }: TwoFactor
         throw new Error(data.error)
       }
 
-      alert('2FA başarıyla devre dışı bırakıldı')
+      window.showToast('2FA başarıyla devre dışı bırakıldı', 'success')
       window.location.reload()
     } catch (err: any) {
       setError(err.message)
