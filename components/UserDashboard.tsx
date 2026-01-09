@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import TwoFactorManage from './TwoFactorManage'
+import Dashboard from './Dashboard'
 
 interface UserDashboardProps {
   username: string
@@ -11,7 +12,7 @@ interface UserDashboardProps {
   onEnable2FA: () => void
 }
 
-type MenuSection = 'general' | 'security' | 'activity' | 'delete'
+type MenuSection = 'home' | 'general' | 'security' | 'activity' | 'delete'
 
 export default function UserDashboard({ 
   username, 
@@ -20,7 +21,7 @@ export default function UserDashboard({
   twoFactorEnabled,
   onEnable2FA
 }: UserDashboardProps) {
-  const [activeSection, setActiveSection] = useState<MenuSection>('general')
+  const [activeSection, setActiveSection] = useState<MenuSection>('home')
   const [activityLogs, setActivityLogs] = useState<any[]>([])
   const [loadingActivity, setLoadingActivity] = useState(false)
   
@@ -137,6 +138,22 @@ export default function UserDashboard({
 
           <nav className="flex-1 p-4 space-y-2">
             <button
+              onClick={() => setActiveSection('home')}
+              className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                activeSection === 'home'
+                  ? 'bg-blue-500 text-white'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span>Ana Ekran</span>
+              </div>
+            </button>
+
+            <button
               onClick={() => setActiveSection('general')}
               className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
                 activeSection === 'general'
@@ -218,6 +235,126 @@ export default function UserDashboard({
 
         {/* Main Content */}
         <main className="flex-1 p-8">
+          {activeSection === 'home' && (
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Hoş Geldiniz, {username}!</h2>
+              <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg shadow-xl p-8 mb-6 text-white">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">Mark-VIII Encryption</h3>
+                    <p className="text-blue-100">AES-256 Şifreleme ile Verilerinizi Koruyun</p>
+                  </div>
+                  <svg className="w-16 h-16 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </div>
+              </div>
+              
+              {/* Quick Stats */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                      <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Güvenlik</p>
+                      <p className="text-xl font-bold text-gray-900 dark:text-white">
+                        {twoFactorEnabled ? '2FA Aktif' : 'Standart'}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 bg-green-100 dark:bg-green-900 rounded-lg">
+                      <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Şifreleme</p>
+                      <p className="text-xl font-bold text-gray-900 dark:text-white">AES-256</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-lg">
+                      <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">Hesap</p>
+                      <p className="text-xl font-bold text-gray-900 dark:text-white">#{userId}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Info Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">🔐 Güvenlik İpuçları</h3>
+                  <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+                    <li className="flex items-start gap-2">
+                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Güçlü şifreler kullanın</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>2FA\'yı etkinleştirin</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Şifreleme şifrelerinizi unutmayın</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">📱 Özellikler</h3>
+                  <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+                    <li className="flex items-start gap-2">
+                      <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>AES-256 Şifreleme</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>2FA Koruması</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>Aktivite Takibi</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Encryption Panel */}
+              <div className="mt-6">
+                <Dashboard username={username} onLogout={onLogout} />
+              </div>
+            </div>
+          )}
+
           {activeSection === 'general' && (
             <div>
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Hesap Bilgileri</h2>

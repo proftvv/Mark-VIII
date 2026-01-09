@@ -18,6 +18,13 @@ export default function Home() {
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(false)
 
   useEffect(() => {
+    // Register service worker for PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch((error) => {
+        console.log('Service Worker registration failed:', error)
+      })
+    }
+
     const session = localStorage.getItem('authenticated')
     const user = localStorage.getItem('username')
     const id = localStorage.getItem('userId')
@@ -110,11 +117,6 @@ export default function Home() {
           onEnable2FA={() => setShow2FASetup(true)}
           twoFactorEnabled={twoFactorEnabled}
         />
-        <div className="bg-gray-50 dark:bg-gray-900 p-8">
-          <div className="max-w-7xl mx-auto">
-            <Dashboard username={username} onLogout={handleLogout} />
-          </div>
-        </div>
       </>
     )
   }
