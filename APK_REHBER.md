@@ -1,31 +1,39 @@
 # 📱 Mark-VIII APK Kurulum Rehberi
 
-## 🚀 APK Nasıl Oluşturulur?
+## 🚀 EN KOLAY YOL: Tek Tıkla APK Oluştur
 
-### Gerekli Programlar:
-1. **Android Studio** (https://developer.android.com/studio)
-2. **Java JDK 11+** (Android Studio ile gelir)
-
-### Adım 1: Android Studio ile APK Build
+### Windows'ta:
 ```bash
-# Terminal'de:
+# CMD veya PowerShell'de:
 cd Z:\Mark-VIII
-
-# Android Studio'yu aç
-npx cap open android
+build-apk.bat
 ```
 
-### Adım 2: APK Build Et
-Android Studio'da:
-1. Üst menüden: **Build** → **Build Bundle(s) / APK(s)** → **Build APK(s)**
-2. Build tamamlandığında bildirim gelir
-3. "**locate**" butonuna tıkla
+Ya da:
+```powershell
+.\build-apk.ps1
+```
 
-### Adım 3: APK Konumu
-APK dosyası burada:
+**2-5 dakika bekle** → APK hazır! ✅
+
+APK Konumu:
 ```
 Z:\Mark-VIII\android\app\build\outputs\apk\debug\app-debug.apk
 ```
+
+---
+
+## 🚀 APK Nasıl Oluşturulur (Manuel)?
+
+### YOL 1: Gradle ile Terminal (Android Studio GEREKMİYOR!)
+```bash
+cd Z:\Mark-VIII
+npx cap sync android
+cd android
+.\gradlew.bat assembleDebug
+```
+
+APK: `android\app\build\outputs\apk\debug\app-debug.apk`
 
 ---
 
