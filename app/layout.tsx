@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Mark-VIII Encryption System',
   description: 'Secure encryption system with 2FA authentication and AES-256 encryption',
+  icons: {
+    icon: '/icon.svg',
+  },
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
