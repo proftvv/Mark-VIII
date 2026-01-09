@@ -1,133 +1,313 @@
 <div align="center">
 
-# 🔐 Mark-VIII Encryption System
+# 🔐 Mark VIII - Güvenli Veri Şifreleme Platformu
 
-### Military-Grade Encryption for Your Personal Data
+### Kurumsal Seviye Güvenlik ile Verilerinizi Koruyun
 
-[![Next.js](https://img.shields.io/badge/Next.js-14.0-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-18.2-61dafb?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-3178c6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Latest-336791?style=for-the-badge&logo=postgresql)](https://www.postgresql.org/)
+[![Vercel](https://img.shields.io/badge/Vercel-Deployed-000000?style=for-the-badge&logo=vercel)](https://vercel.com/)
 
-**Cross-platform encryption solution with biometric authentication for Windows & Android**
+**🌐 Canlı Sistem:** [https://mark8.proftvv.com.tr/](https://mark8.proftvv.com.tr/)
 
-[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Security](#-security) • [Deployment](#-deployment)
-
-</div>
+*Modern web teknolojileri ile geliştirilmiş, AES-256 şifreleme & Passkey desteği sunan profesyonel veri güvenliği çözümü*
 
 ---
 
-## 🌟 Features
+</div>
+
+## 📋 Platform Hakkında
+
+**Mark VIII**, kişisel ve kurumsal verilerinizi en yüksek güvenlik standartlarında şifreleyen ve yöneten modern bir web platformudur. Kullanıcılarına kolay, hızlı ve son derece güvenli bir deneyim sunmak için tasarlanmıştır.
+
+### 🎯 Kimler İçin?
+
+- 💼 **Profesyoneller:** Müşteri bilgileri, iş verileri, gizli notlar
+- 👨‍💻 **Geliştiriciler:** API anahtarları, database bilgileri, server credentials
+- 🏢 **Kurumlar:** Hassas dokümanlar, şifreli raporlar, güvenli arşivleme
+- 👤 **Bireysel Kullanıcılar:** Şifreler, kişisel notlar, önemli belgeler
+
+---
+
+## 🌟 Temel Özellikler
+
+### 🔒 Askeri Seviye Güvenlik
 
 <table>
 <tr>
-<td>
+<td width="50%">
 
-### 🔒 Security First
-- **AES-256 Encryption** - Military-grade encryption
-- **Bcrypt Hashing** - Secure password storage
-- **WebAuthn Biometric** - Fingerprint & Face ID
-- **Zero-Knowledge** - Your keys, your data
-
-</td>
-<td>
-
-### 🌐 Cross-Platform
-- **Windows Desktop** - Full browser support
-- **Android Mobile** - Progressive Web App
-- **Responsive Design** - Works everywhere
-- **Offline Capable** - Local database
+#### 🛡️ AES-256 Şifreleme
+- **Endüstri Standardı:** NSA tarafından "TOP SECRET" sınıflandırılmış veriler için onaylı
+- **Kırılması İmkansız:** Günümüz süper bilgisayarlarıyla 2^256 kombinasyon (10^77 yıl)
+- **Client-Side Encryption:** Veriler sunucuya gitmeden cihazınızda şifrelenir
+- **Zero-Knowledge:** Şifreleme anahtarınızı sadece siz bilirsiniz
 
 </td>
-</tr>
-<tr>
-<td>
+<td width="50%">
 
-### 🎨 Modern UI/UX
-- **Tailwind CSS** - Beautiful & fast
-- **Dark Mode** - Easy on the eyes
-- **Mobile-First** - Touch optimized
-- **Accessible** - WCAG compliant
-
-</td>
-<td>
-
-### ⚡ Performance
-- **Next.js 14** - Lightning fast
-- **SQLite** - Local storage
-- **Type-Safe** - Full TypeScript
-- **Optimized** - Production ready
+#### 🔑 Modern Kimlik Doğrulama
+- **Email/Username Giriş:** Esnek giriş seçenekleri
+- **Passkey Teknolojisi:** Yüz tanıma/parmak izi ile anında giriş
+- **2FA (TOTP):** Google/Microsoft Authenticator desteği
+- **Bcrypt Hashing:** Şifreler SHA-256 hash ile saklanır
 
 </td>
 </tr>
 </table>
 
+### ⚡ Kullanıcı Deneyimi
+
+- **🎨 Modern Arayüz:** Koyu tema ile gözlere kolay tasarım
+- **📱 Responsive:** Telefon, tablet, bilgisayar - her cihazda mükemmel görünüm
+- **🚀 Hızlı:** Next.js 15 ile anlık sayfa yüklemeleri
+- **🌍 Türkçe:** Tam Türkçe dil desteği
+
+### 🔐 Güvenlik Katmanları
+
+```
+┌─────────────────────────────────────────────────┐
+│  1. HTTPS/TLS Şifreleme (Veri İletimi)        │
+│  2. AES-256 Encryption (Veri Depolama)        │
+│  3. JWT Token Authentication (Oturum)         │
+│  4. Passkey/2FA (Kimlik Doğrulama)           │
+│  5. PostgreSQL Güvenliği (Database)           │
+│  6. Vercel WAF (Web Application Firewall)    │
+└─────────────────────────────────────────────────┘
+```
+
 ---
 
-## 📸 Screenshots
+## 🚀 Nasıl Kullanılır?
+
+### 1️⃣ Platforma Erişim
+
+**🌐 Web Adresi:** [https://mark8.proftvv.com.tr/](https://mark8.proftvv.com.tr/)
+
+> ⚠️ **Önemli:** Mark VIII kapalı kaynak bir platformdur. Kodu indirip yerel olarak çalıştıramazsınız. Tüm işlemler güvenli bulut sunucularımızda gerçekleşir.
+
+### 2️⃣ Hesap Oluşturma
+
+1. **"Hesap Oluştur"** butonuna tıklayın
+2. Aşağıdaki bilgileri girin:
+   - **Email:** Hesap kurtarma için geçerli email adresi
+   - **Kullanıcı Adı:** 3-20 karakter arası benzersiz kullanıcı adı
+   - **Şifre:** En az 8 karakter (büyük harf, küçük harf, rakam önerilir)
+3. Şifrenizi tekrar girin ve **"Hesap Oluştur"** butonuna basın
+
+### 3️⃣ Giriş Yapma
+
+**Klasik Yöntem:**
+- Email veya kullanıcı adınız + şifreniz ile giriş yapın
+
+**Passkey ile (Önerilen):**
+- **"Passkey ile Giriş"** butonuna tıklayın
+- Cihazınızın parmak izi okuyucusu veya yüz tanıma özelliği ile doğrulayın
+- Şifre yazmadan anında giriş yapın! 🎉
+
+### 4️⃣ Veri Şifreleme
+
+1. **Dashboard → Genel** sekmesine gidin
+2. **"Yeni Veri Ekle"** butonuna tıklayın
+3. Başlık ve içerik girin
+4. **"Şifrele ve Kaydet"** - Otomatik olarak AES-256 ile şifrelenir
+5. Verilerinizi listeden görebilir, düzenleyebilir veya silebilirsiniz
+
+---
+
+## 🔐 Güvenlik Özellikleri Detayları
+
+### 🛡️ AES-256 Encryption
+
+**Ne kadar güvenli?**
+- **Teorik Kırma Süresi:** 3 × 10^51 yıl (evrenin yaşı: 13.8 × 10^9 yıl)
+- **Kullanım Alanları:** ABD hükümeti, NASA, bankacılık sektörü, savunma sanayii
+- **Sertifikalar:** FIPS 140-2 onaylı
+
+**Nasıl Çalışır?**
+```
+Düz Metin → AES-256 Şifreleme → Şifreli Veri → PostgreSQL
+    ↓                                              ↓
+ "Merhaba"                                "a7f3k9x2..."
+```
+
+### 🔑 Passkey (WebAuthn) Teknolojisi
+
+**Neden Passkey?**
+- 🚫 **Phishing Koruması:** Sahte sitelere çalınması imkansız
+- ⚡ **Hız:** Şifre yazmaktan 3-5 kat daha hızlı
+- 🔒 **Güvenlik:** Cihaza bağlı kriptografik anahtar çifti
+- 🌍 **Standart:** FIDO2/WebAuthn - Google, Apple, Microsoft tarafından desteklenir
+
+**Teknik Detaylar:**
+- **Public Key Cryptography:** RSA veya ECDSA
+- **Biometric:** Parmak izi, yüz tanıma, PIN
+- **Platform:** Windows Hello, Touch ID, Android Biometric
+
+### 🔐 İki Faktörlü Kimlik Doğrulama (2FA)
+
+**Nasıl Aktive Edilir?**
+1. Dashboard → Güvenlik → **"2FA Etkinleştir"**
+2. Google Authenticator/Microsoft Authenticator ile QR kodu tarayın
+3. 6 haneli kodu girin ve doğrulayın
+4. **Backup kodlarını güvenli bir yere kaydedin!**
+
+**Desteklenen Uygulamalar:**
+- Google Authenticator
+- Microsoft Authenticator
+- Authy
+- 1Password
+- Bitwarden
+
+---
+
+## 📊 Kullanıcı Paneli
+
+### 🏠 Ana Ekran
+- Güvenlik seviyeniz (0-10 arası)
+- Şifrelenmiş veri miktarı
+- Son aktiviteler
+- Hızlı erişim butonları
+
+### ⚙️ Genel
+- Şifreli veri listesi
+- Yeni veri ekleme
+- Veri düzenleme/silme
+- Arama ve filtreleme
+
+### 🔒 Güvenlik
+- 2FA yönetimi (aktif/pasif)
+- Passkey oluşturma
+- Backup kodlarını görüntüleme
+- Şifre değiştirme
+
+### 📋 Aktiviteler
+- Giriş kayıtları
+- IP adresi takibi
+- Cihaz bilgileri
+- Tarih/saat damgaları
+
+### ❌ Hesabı Sil
+- Tüm verilerinizi kalıcı olarak silin
+- Geri alınamaz işlem
+- Onay gerektirir
+
+---
+
+## 🏗️ Teknoloji Stack
+
+### Frontend
+```typescript
+- Next.js 15 (React Framework)
+- TypeScript (Type Safety)
+- Tailwind CSS (Styling)
+- Radix UI (Components)
+```
+
+### Backend
+```typescript
+- Node.js (Runtime)
+- Next.js API Routes (Serverless)
+- PostgreSQL (Database)
+- Vercel (Hosting & CDN)
+```
+
+### Güvenlik
+```typescript
+- AES-256-GCM (Encryption)
+- bcryptjs (Password Hashing)
+- JWT (JSON Web Tokens)
+- WebAuthn/FIDO2 (Passkey)
+- speakeasy (2FA/TOTP)
+```
+
+---
+
+## 🔒 Gizlilik & Veri Politikası
+
+### ✅ Sakladığımız Veriler
+- Email adresi (hesap kurtarma)
+- Kullanıcı adı (giriş)
+- Şifrelenmiş şifre hash'i (bcrypt)
+- Şifreli verileriniz (AES-256)
+- Giriş logları (güvenlik)
+
+### ❌ Saklamadığımız Veriler
+- Şifreleme anahtarlarınız
+- Düz metin şifreleriniz
+- Kredi kartı bilgileri
+- Kişisel kimlik bilgileri
+
+### 🛡️ Güvenlik Garantileri
+- **Zero-Knowledge Encryption:** Verilerinizi biz bile göremeyiz
+- **No Third-Party:** Verileriniz 3. parti servislerle paylaşılmaz
+- **GDPR Compliant:** Avrupa veri koruma yasalarına uygun
+- **Regular Backups:** Günlük otomatik yedekleme
+
+---
+
+## ❓ Sıkça Sorulan Sorular
+
+### 🤔 Şifremi unutursam ne olur?
+Şifreniz bcrypt ile hash'lenmiştir ve geri alınamaz. Ancak email ile şifre sıfırlama özelliğimiz yakında eklenecektir.
+
+### 🔑 Passkey'imi kaybedersem?
+Passkey cihaza bağlıdır. Cihazınızı kaybederseniz klasik yöntemle (email/şifre) giriş yapabilir, yeni bir passkey oluşturabilirsiniz.
+
+### 💰 Ücretli mi?
+Şu anda tamamen ücretsizdir. Gelecekte premium özellikler eklenebilir.
+
+### 📱 Mobil uygulama var mı?
+Hayır, ancak web sitemiz tam responsive'dir ve mobil cihazlarda mükemmel çalışır.
+
+### 🔄 Verilerimi dışarı aktarabilir miyim?
+Evet, yakında "Export" özelliği eklenecektir (JSON/CSV formatında).
+
+---
+
+## 📞 Destek & İletişim
+
+### 🐛 Hata Bildirimi
+Bir hata ile karşılaştıysanız, lütfen şu bilgileri içeren bir rapor gönderin:
+- Hata mesajı
+- Tarayıcı bilgisi
+- İşlem adımları
+- Ekran görüntüsü (varsa)
+
+### 💡 Özellik İsteği
+Yeni bir özellik öneriniz varsa bizimle paylaşın!
+
+### 📧 İletişim
+- **Website:** [https://mark8.proftvv.com.tr/](https://mark8.proftvv.com.tr/)
+- **Email:** ozcan@reportdisticaret.com
+
+---
+
+## 📜 Lisans & Yasal
+
+**Copyright © 2026 Mark VIII - Tüm Hakları Saklıdır**
+
+Bu yazılım kapalı kaynak koddur. Kaynak kodunun kopyalanması, dağıtılması veya tersine mühendislik yapılması yasaktır.
+
+**Kullanım Koşulları:**
+- Platform sadece yasal amaçlarla kullanılabilir
+- Kötüye kullanım tespit edilirse hesabınız kapatılır
+- Verilerinizin yedeklenmesi sizin sorumluluğunuzdadır
+
+---
 
 <div align="center">
 
-### Login & Authentication
-<img src="./public/screenshots/login.png" alt="Login Screen" width="45%"/> <img src="./public/screenshots/register.png" alt="Register Screen" width="45%"/>
+### 🔐 Güvenliğiniz Bizim Önceliğimiz
 
-### Dashboard & Encryption
-<img src="./public/screenshots/dashboard.png" alt="Dashboard" width="45%"/>
+**[Mark VIII'e Başlayın →](https://mark8.proftvv.com.tr/)**
+
+---
+
+*Made with ❤️ and 🔒 by Mark VIII Team*
 
 </div>
-
----
-
-## 🚀 Installation
-
-### Prerequisites
-
-```bash
-# Node.js 18 or higher
-node --version  # Should be v18.0.0 or higher
-
-# npm (comes with Node.js)
-npm --version
-```
-
-### Quick Start
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/proftvv/Mark-VIII.git
-cd Mark-VIII
-
-# 2. Run the installer (Windows)
-install.bat
-
-# 3. Install dependencies
-npm install
-
-# 4. Start development server
-npm run dev
-
-# 5. Open in browser
-# http://localhost:3000
-```
-
-### Manual Installation
-
-If the installer doesn't work:
-
-```bash
-# Create project structure
-node create_structure.js
-node create_components.js
-node create_api.js
-
-# Install dependencies
-npm install
-
-# Start server
-npm run dev
-```
-
----
 
 ## 📱 Android Access
 

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import TwoFactorManage from './TwoFactorManage'
 import Dashboard from './Dashboard'
 import DownloadButton from './DownloadButton'
 
@@ -395,11 +394,17 @@ export default function UserDashboard({
               {/* 2FA Section */}
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">İki Faktörlü Kimlik Doğrulama</h3>
-                <TwoFactorManage 
-                  userId={userId}
-                  enabled={twoFactorEnabled}
-                  onEnable={onEnable2FA}
-                />
+                <div>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    {twoFactorEnabled ? '2FA etkindir' : '2FA pasif durumda'}
+                  </p>
+                  <button
+                    onClick={onEnable2FA}
+                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                  >
+                    {twoFactorEnabled ? '2FA Devre Dışı Bırak' : '2FA Etkinleştir'}
+                  </button>
+                </div>
               </div>
 
               {/* Password Change */}
