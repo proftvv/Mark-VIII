@@ -15,6 +15,7 @@ export default function Home() {
   const [userId, setUserId] = useState<number | null>(null)
   const [needs2FA, setNeeds2FA] = useState(false)
   const [show2FASetup, setShow2FASetup] = useState(false)
+  const [twoFactorEnabled, setTwoFactorEnabled] = useState(false)
 
   useEffect(() => {
     const session = localStorage.getItem('authenticated')
@@ -27,11 +28,12 @@ export default function Home() {
     }
   }, [])
 
-  const handleLogin = (user: string, id: number, twoFactorEnabled: boolean) => {
+  const handleLogin = (user: string, id: number, has2FA: boolean) => {
     setUsername(user)
     setUserId(id)
+    setTwoFactorEnabled(has2FA)
     
-    if (twoFactorEnabled) {
+    if (has2FA) {
       // User has 2FA enabled, show verification
       setNeeds2FA(true)
     } else {
@@ -67,23 +69,22 @@ export default function Home() {
 
   const handle2FASetupComplete = () => {
     setShow2FASetup(false)
+    window.location.reload() // Reload to update 2FA status
   }
 
-  // Show 2FA verification modal if needed
+  // Show 2FA verification full page if needed
   if (needs2FA && userId) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center p-4">
-        <TwoFactorVerify 
-          userId={userId} 
-          username={username}
-          onVerified={handle2FAVerified}
-          onCancel={() => {
-            setNeeds2FA(false)
-            setUsername('')
-            setUserId(null)
-          }}
-        />
-      </div>
+      <TwoFactorVerify 
+        userId={userId} 
+        username={username}
+        onSuccess={handle2FAVerified}
+        onCancel={() => {
+          setNeeds2FA(false)
+          setUsername('')
+          setUserId(null)
+        }}
+      />
     )
   }
 
@@ -101,19 +102,20 @@ export default function Home() {
 
   if (isAuthenticated && userId) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4">
-        <div className="max-w-6xl mx-auto">
-          <UserDashboard 
-            userId={userId} 
-            username={username}
-            onLogout={handleLogout}
-            onEnable2FA={() => setShow2FASetup(true)}
-          />
-          <div className="mt-8">
+      <>
+        <UserDashboard 
+          userId={userId} 
+          username={username}
+          onLogout={handleLogout}
+          onEnable2FA={() => setShow2FASetup(true)}
+          twoFactorEnabled={twoFactorEnabled}
+        />
+        <div className="bg-gray-50 dark:bg-gray-900 p-8">
+          <div className="max-w-7xl mx-auto">
             <Dashboard username={username} onLogout={handleLogout} />
           </div>
         </div>
-      </main>
+      </>
     )
   }
 
