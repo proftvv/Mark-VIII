@@ -59,6 +59,7 @@ export default function TwoFactorVerify({ userId, username, onVerified, onCancel
           onChange={(e) => setCode(e.target.value)}
           placeholder={useBackupCode ? "XXXXXXXX" : "000000"}
           maxLength={useBackupCode ? 8 : 6}
+          autoComplete="off"
           className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-500 text-center text-2xl tracking-wider mb-4"
         />
 

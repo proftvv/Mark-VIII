@@ -34,7 +34,7 @@ export default async function handler(
     const hashedPassword = await bcrypt.hash(password, 10)
     const userId = await createUser(username, hashedPassword)
 
-    return res.status(201).json({ success: true, userId })
+    return res.status(201).json({ success: true, userId, username })
   } catch (error) {
     console.error('Registration error:', error)
     return res.status(500).json({ error: 'Internal server error' })
