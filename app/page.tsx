@@ -18,13 +18,6 @@ export default function Home() {
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(false)
 
   useEffect(() => {
-    // Register service worker for PWA
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch((error) => {
-        console.log('Service Worker registration failed:', error)
-      })
-    }
-
     const session = localStorage.getItem('authenticated')
     const user = localStorage.getItem('username')
     const id = localStorage.getItem('userId')

@@ -115,6 +115,28 @@ export async function findUserByEmailOrUsername(identifier: string) {
   return rows[0] || null
 }
 
+// ID ile kullanıcı bul
+export async function findUserById(id: number) {
+  const { rows } = await sql<{
+    id: number
+    email: string
+    username: string
+    password_hash: string
+    has_passkey: boolean
+    two_factor_enabled: boolean
+    two_factor_secret: string | null
+    backup_codes: string[] | null
+    last_login: Date | null
+  }>`
+    SELECT id, email, username, password_hash, has_passkey, two_factor_enabled, 
+           two_factor_secret, backup_codes, last_login 
+    FROM users 
+    WHERE id = ${id} 
+    LIMIT 1;
+  `
+  return rows[0] || null
+}
+
 // Yeni kullanıcı oluştur (email + username + password)
 export async function createUser(email: string, username: string, passwordHash: string) {
   const { rows } = await sql<{ id: number }>`

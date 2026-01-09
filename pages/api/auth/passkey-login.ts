@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { initDatabase, getPasskeyByCredentialId } from '@/lib/database'
+import { initDatabase, getPasskeyByCredentialId, findUserById } from '@/lib/database'
 import jwt from 'jsonwebtoken'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key'
@@ -15,7 +15,7 @@ export default async function handler(
 
   await initDatabase()
 
-  const { credentialId, clientData, authenticatorData } = req.body
+  const { credentialId } = req.body
 
   if (!credentialId) {
     return res.status(400).json({ error: 'Credential ID gerekli' })
@@ -28,9 +28,15 @@ export default async function handler(
       return res.status(401).json({ error: 'Passkey bulunamadı' })
     }
 
+    // User'ı bul
+    const user = await findUserById(passkey.user_id)
+    if (!user) {
+      return res.status(401).json({ error: 'Kullanıcı bulunamadı' })
+    }
+
     // JWT token oluştur
     const token = jwt.sign(
-      { userId: passkey.user_id, method: 'passkey' },
+      { userId: user.id, email: user.email, username: user.username },
       JWT_SECRET,
       { expiresIn: '7d' }
     )
@@ -38,11 +44,12 @@ export default async function handler(
     return res.status(200).json({
       success: true,
       token,
-      userId: passkey.user_id,
-      message: 'Passkey ile giriş başarılı'
+      userId: user.id,
+      email: user.email,
+      username: user.username
     })
   } catch (error) {
     console.error('Passkey login error:', error)
-    return res.status(500).json({ error: 'Sunucu hatası' })
+    return res.status(500).json({ error: 'Passkey giriş hatası' })
   }
 }
