@@ -38,7 +38,7 @@ export default async function handler(
       SET 
         two_factor_enabled = TRUE,
         two_factor_secret = ${secret},
-        backup_codes = ${JSON.stringify(backupCodes)}
+        backup_codes = ${backupCodes}
       WHERE id = ${userId}
     `
 

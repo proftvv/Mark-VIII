@@ -37,7 +37,7 @@ export default async function handler(
 
     if (useBackupCode) {
       // Check backup codes
-      const codes = JSON.parse(backup_codes || '[]')
+      const codes = backup_codes || []
       const codeIndex = codes.indexOf(token.toUpperCase())
       
       if (codeIndex !== -1) {
@@ -45,7 +45,7 @@ export default async function handler(
         codes.splice(codeIndex, 1)
         await sql`
           UPDATE users 
-          SET backup_codes = ${JSON.stringify(codes)}
+          SET backup_codes = ${codes}
           WHERE id = ${userId}
         `
         isValid = true
