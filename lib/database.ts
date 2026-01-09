@@ -7,18 +7,18 @@ export async function initDatabase() {
   if (isInitialized) return
   
   try {
-    // Check if tables need to be recreated (schema validation)
-    const needsRecreate = await checkSchemaValidity()
-    
-    if (needsRecreate) {
-      // Drop old tables with incorrect schema
+    // Always attempt to drop and recreate to ensure schema is correct
+    try {
+      await sql`DROP TABLE IF EXISTS activity_log CASCADE;`
       await sql`DROP TABLE IF EXISTS encrypted_data CASCADE;`
       await sql`DROP TABLE IF EXISTS users CASCADE;`
+    } catch (dropError) {
+      console.warn('Drop tables error (may be normal):', dropError)
     }
 
-    // Create users table if it doesn't exist
+    // Create users table
     await sql`
-      CREATE TABLE IF NOT EXISTS users (
+      CREATE TABLE users (
         id SERIAL PRIMARY KEY,
         username TEXT UNIQUE NOT NULL,
         password_hash TEXT NOT NULL,
@@ -30,9 +30,9 @@ export async function initDatabase() {
       );
     `
 
-    // Create encrypted_data table if it doesn't exist
+    // Create encrypted_data table
     await sql`
-      CREATE TABLE IF NOT EXISTS encrypted_data (
+      CREATE TABLE encrypted_data (
         id SERIAL PRIMARY KEY,
         user_id INTEGER NOT NULL,
         title TEXT NOT NULL,
@@ -44,9 +44,9 @@ export async function initDatabase() {
       );
     `
 
-    // Create activity_log table if it doesn't exist
+    // Create activity_log table
     await sql`
-      CREATE TABLE IF NOT EXISTS activity_log (
+      CREATE TABLE activity_log (
         id SERIAL PRIMARY KEY,
         user_id INTEGER NOT NULL,
         action TEXT NOT NULL,
@@ -62,24 +62,6 @@ export async function initDatabase() {
   } catch (error) {
     console.error('Database initialization error:', error)
     // Don't set isInitialized so it can retry on next call
-  }
-}
-
-async function checkSchemaValidity(): Promise<boolean> {
-  try {
-    // Check if users table has password_hash column
-    const result = await sql`
-      SELECT column_name 
-      FROM information_schema.columns 
-      WHERE table_name = 'users' 
-        AND column_name = 'password_hash'
-    `
-    
-    // If table doesn't exist or column doesn't exist, needs recreate
-    return result.rows.length === 0
-  } catch (error) {
-    // If error, assume needs recreate
-    return true
   }
 }
 

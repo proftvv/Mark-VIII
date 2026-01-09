@@ -69,10 +69,10 @@
 <div align="center">
 
 ### Login & Authentication
-<img src="./public/screenshots/login-screen.svg" alt="Login Screen" width="45%"/> <img src="./public/screenshots/register-screen.svg" alt="Register Screen" width="45%"/>
+<img src="./public/screenshots/login.png" alt="Login Screen" width="45%"/> <img src="./public/screenshots/register.png" alt="Register Screen" width="45%"/>
 
 ### Dashboard & Encryption
-<img src="./public/screenshots/dashboard.svg" alt="Dashboard" width="45%"/> <img src="./public/screenshots/encryption-panel.svg" alt="Encryption Panel" width="45%"/>
+<img src="./public/screenshots/dashboard.png" alt="Dashboard" width="45%"/>
 
 </div>
 
