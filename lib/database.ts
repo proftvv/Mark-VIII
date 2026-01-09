@@ -1,7 +1,7 @@
 import { sql } from '@vercel/postgres'
 
 export async function initDatabase() {
-  // Create tables if they don't exist (Postgres)
+  // Create users table first
   await sql`
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
@@ -11,15 +11,31 @@ export async function initDatabase() {
     );
   `
 
+  // Create encrypted_data table with explicit INTEGER type matching SERIAL
   await sql`
     CREATE TABLE IF NOT EXISTS encrypted_data (
       id SERIAL PRIMARY KEY,
-      user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      user_id INTEGER NOT NULL,
       title TEXT NOT NULL,
       encrypted_content TEXT NOT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
+  `
+
+  // Add foreign key constraint separately if it doesn't exist
+  await sql`
+    DO $$ 
+    BEGIN
+      IF NOT EXISTS (
+        SELECT 1 FROM pg_constraint 
+        WHERE conname = 'encrypted_data_user_id_fkey'
+      ) THEN
+        ALTER TABLE encrypted_data 
+        ADD CONSTRAINT encrypted_data_user_id_fkey 
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+      END IF;
+    END $$;
   `
 }
 
