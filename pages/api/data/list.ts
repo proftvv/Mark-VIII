@@ -9,6 +9,9 @@ export default async function handler(
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
+  // Initialize database tables on first call
+  await initDatabase()
+
   const { username } = req.query
 
   if (!username || typeof username !== 'string') {
