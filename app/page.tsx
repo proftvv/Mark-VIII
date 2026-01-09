@@ -7,7 +7,6 @@ import Dashboard from '@/components/Dashboard'
 import UserDashboard from '@/components/UserDashboard'
 import TwoFactorVerify from '@/components/TwoFactorVerify'
 import TwoFactorSetup from '@/components/TwoFactorSetup'
-import DownloadButton from '@/components/DownloadButton'
 
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -137,9 +136,6 @@ export default function Home() {
           />
         )}
       </div>
-      
-      {/* APK Download Button */}
-      <DownloadButton />
     </main>
   )
 }
