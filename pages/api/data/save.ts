@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { initDatabase, findUserByUsername, insertEncryptedData } from '@/lib/database'
+import { initDatabase, findUserByEmailOrUsername, insertEncryptedData } from '@/lib/database'
 import { encryptData } from '@/lib/encryption'
 
 export default async function handler(
@@ -21,7 +21,7 @@ export default async function handler(
 
   try {
     await initDatabase()
-    const user = await findUserByUsername(username)
+    const user = await findUserByEmailOrUsername(username)
     if (!user) {
       return res.status(404).json({ error: 'User not found' })
     }
