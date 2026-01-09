@@ -27,6 +27,8 @@ export default function TwoFactorSetup({ userId, onSuccess }: TwoFactorSetupProp
       })
     }
   }, [secret, step, userId])
+
+  const handleRequestSetup = async () => {
     setLoading(true)
     setError('')
 
@@ -44,13 +46,6 @@ export default function TwoFactorSetup({ userId, onSuccess }: TwoFactorSetupProp
       setSecret(data.secret)
       setBackupCodes(data.backupCodes)
       setStep('verify')
-
-      // Generate QR code
-      if (canvasRef.current && data.qrCode) {
-        QRCode.toCanvas(canvasRef.current, data.qrCode, { width: 200 }, (err) => {
-          if (err) console.error('QR code generation error:', err)
-        })
-      }
     } catch (err: any) {
       setError(err.message)
     } finally {
