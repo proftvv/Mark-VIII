@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { checkBiometricAvailability, authenticateWithBiometric } from '@/lib/biometric'
 
 interface LoginFormProps {
-  onLogin: (username: string) => void
+  onLogin: (username: string, userId: number, twoFactorEnabled: boolean) => void
   onSwitchToRegister: () => void
 }
 
@@ -34,7 +34,11 @@ export default function LoginForm({ onLogin, onSwitchToRegister }: LoginFormProp
       const data = await response.json()
 
       if (response.ok) {
-        onLogin(username)
+        // Store user info including 2FA status
+        localStorage.setItem('userId', data.userId)
+        localStorage.setItem('username', data.username)
+        localStorage.setItem('twoFactorEnabled', data.twoFactorEnabled ? 'true' : 'false')
+        onLogin(username, data.userId, data.twoFactorEnabled)
       } else {
         setError(data.error || 'Login failed')
       }
@@ -51,13 +55,17 @@ export default function LoginForm({ onLogin, onSwitchToRegister }: LoginFormProp
       return
     }
 
+    setError('Biometric login will be available soon')
+    return
+    
     setLoading(true)
     setError('')
 
     try {
       const success = await authenticateWithBiometric(username)
       if (success) {
-        onLogin(username)
+        // Biometric auth successful, now need password for full login
+        setError('Biometric verified but password still required')
       } else {
         setError('Biometric authentication failed')
       }
