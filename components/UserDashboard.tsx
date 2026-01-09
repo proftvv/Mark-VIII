@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Dashboard from './Dashboard'
-import DownloadButton from './DownloadButton'
+import PasskeySetup from './PasskeySetup'
 
 interface UserDashboardProps {
   username: string
@@ -391,6 +391,22 @@ export default function UserDashboard({
             <div>
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Güvenlik</h2>
               
+              {/* Passkey Section */}
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">🔑 Passkey (Şifresiz Giriş)</h3>
+                <div>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    Passkey kullanarak parmak izi, yüz tanıma veya PIN ile güvenli şekilde giriş yapabilirsiniz.
+                  </p>
+                  <PasskeySetup 
+                    userId={userId} 
+                    onSuccess={() => {
+                      alert('Passkey başarıyla ayarlandı! Artık şifresiz giriş yapabilirsiniz.')
+                    }}
+                  />
+                </div>
+              </div>
+
               {/* 2FA Section */}
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">İki Faktörlü Kimlik Doğrulama</h3>
@@ -534,9 +550,6 @@ export default function UserDashboard({
           )}
         </main>
       </div>
-
-      {/* APK Download Button */}
-      <DownloadButton />
     </div>
   )
 }
