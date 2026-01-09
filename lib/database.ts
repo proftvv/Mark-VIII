@@ -1,33 +1,41 @@
 import { sql } from '@vercel/postgres'
 
+let isInitialized = false
+
 export async function initDatabase() {
-  // Drop existing tables to ensure clean schema
-  await sql`DROP TABLE IF EXISTS encrypted_data CASCADE;`
-  await sql`DROP TABLE IF EXISTS users CASCADE;`
+  // Only run once per server instance
+  if (isInitialized) return
+  
+  try {
+    // Create users table if it doesn't exist
+    await sql`
+      CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        username TEXT UNIQUE NOT NULL,
+        password_hash TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `
 
-  // Create users table
-  await sql`
-    CREATE TABLE users (
-      id SERIAL PRIMARY KEY,
-      username TEXT UNIQUE NOT NULL,
-      password_hash TEXT NOT NULL,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-  `
-
-  // Create encrypted_data table with foreign key
-  await sql`
-    CREATE TABLE encrypted_data (
-      id SERIAL PRIMARY KEY,
-      user_id INTEGER NOT NULL,
-      title TEXT NOT NULL,
-      encrypted_content TEXT NOT NULL,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      CONSTRAINT encrypted_data_user_id_fkey 
-        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-    );
-  `
+    // Create encrypted_data table if it doesn't exist
+    await sql`
+      CREATE TABLE IF NOT EXISTS encrypted_data (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL,
+        title TEXT NOT NULL,
+        encrypted_content TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT encrypted_data_user_id_fkey 
+          FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+      );
+    `
+    
+    isInitialized = true
+  } catch (error) {
+    console.error('Database initialization error:', error)
+    // Don't set isInitialized so it can retry on next call
+  }
 }
 
 export async function findUserByUsername(username: string) {
