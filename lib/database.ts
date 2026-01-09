@@ -22,6 +22,10 @@ export async function initDatabase() {
         id SERIAL PRIMARY KEY,
         username TEXT UNIQUE NOT NULL,
         password_hash TEXT NOT NULL,
+        two_factor_enabled BOOLEAN DEFAULT FALSE,
+        two_factor_secret TEXT,
+        backup_codes TEXT[],
+        last_login TIMESTAMP,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `
@@ -36,6 +40,20 @@ export async function initDatabase() {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         CONSTRAINT encrypted_data_user_id_fkey 
+          FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+      );
+    `
+
+    // Create activity_log table if it doesn't exist
+    await sql`
+      CREATE TABLE IF NOT EXISTS activity_log (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL,
+        action TEXT NOT NULL,
+        ip_address TEXT,
+        user_agent TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT activity_log_user_id_fkey 
           FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
       );
     `

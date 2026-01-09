@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import bcrypt from 'bcryptjs'
 import { initDatabase, findUserByUsername } from '@/lib/database'
+import { logActivity } from '@/lib/activity'
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,7 +33,17 @@ export default async function handler(
       return res.status(401).json({ error: 'Invalid credentials' })
     }
 
-    return res.status(200).json({ success: true, userId: user.id, username: user.username })
+    // Log login activity
+    const ipAddress = req.headers['x-forwarded-for'] as string || req.socket.remoteAddress
+    const userAgent = req.headers['user-agent']
+    await logActivity(user.id, 'login', ipAddress, userAgent)
+
+    return res.status(200).json({ 
+      success: true, 
+      userId: user.id, 
+      username: user.username,
+      twoFactorEnabled: user.two_factor_enabled
+    })
   } catch (error) {
     console.error('Login error:', error)
     return res.status(500).json({ error: 'Internal server error' })
