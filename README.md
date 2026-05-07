@@ -280,7 +280,7 @@ Yeni bir özellik öneriniz varsa bizimle paylaşın!
 
 ### 📧 İletişim
 - **Website:** [https://mark8.proftvv.com.tr/](https://mark8.proftvv.com.tr/)
-- **Email:** ozcan@reportdisticaret.com
+- **Email:** yilmazcelebiozcan@gmail.com
 
 ---
 
